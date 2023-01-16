@@ -1,9 +1,9 @@
 <section class="container">
-  <h3 class="project-name">{{project.name}}</h3>
-  <h4>Opening Hour: {{project.needed_funding}}</h4>
+  <h3 class="Post-name">{{Post.name}}</h3>
+  <h4>Opening Hour: {{Post.needed_funding}}</h4>
   {{#if loggedIn}}
   <section class="flex-row justify-center">
-    {{#each project.name as |project|}}
+    {{#each Post.name as |Post|}}
     {{/each}}
   </section>
 </section>

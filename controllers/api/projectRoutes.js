@@ -1,52 +1,35 @@
 const router = require('express').Router();
-const db = require('../../models');
+const { Post } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-router.get('/', async (req, res) => {
-    try {
-      const projData = await db.Project.findAll({
-        attributes: { exclude: ['password'] },
-        order: [['name', 'ASC']],
-      });
-  
-      const projects = projData.map(project => project.get({ plain: true }));
-  
-      res.render('homepage', {
-        users,
-        logged_in: req.session.logged_in,
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
-    const newProject = await Project.create({
+    const newPost = await Post.create({
       ...req.body,
       user_id: req.session.user_id,
     });
 
-    res.status(200).json(newProject);
+    res.status(200).json(newPost);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
-    const projectData = await Project.destroy({
+    const PostData = await Post.destroy({
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
       },
     });
 
-    if (!projectData) {
-      res.status(404).json({ message: 'No project found with this id!' });
+    if (!PostData) {
+      res.status(404).json({ message: 'No Post found with this id!' });
       return;
     }
 
-    res.status(200).json(projectData);
+    res.status(200).json(PostData);
   } catch (err) {
     res.status(500).json(err);
   }
