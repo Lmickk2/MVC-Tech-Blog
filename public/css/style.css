@@ -1,0 +1,89 @@
+html, body {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+header, .post:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+.no-button {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 100%;
+}
+
+.no-button:hover {
+  color: #065b83;
+  text-decoration: underline;
+}
+
+.featured {
+  text-align: center;
+  font-size: 38px;
+  padding-bottom: 12px;
+}
+
+.p-2 {
+  background-color: black;
+}
+
+.techBlog {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  text-align: center !important;
+}
+
+.navClass {
+  color: white;
+  text-align: center;
+}
+
+.post-content {
+  border: 1px solid black;
+}
+
+.postBox {
+  padding: 15px;
+  border: 1px solid black;
+  width: 100%;
+  margin-top: 14px;
+}
+
+.postedBy {
+  border-bottom: 0.5px solid black;
+  border-width: 2%;
+}
+
+
+.postTitle {
+  text-align: center;
+  padding-bottom: 5px;
+  margin: auto;
+}
+
+.new-comment-form {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.post-desc {
+  text-align: center;
+}
+
+.postCreate {
+  text-align: center;
+}
+
+.comment-list {
+  padding-top: 25px;
+  text-align: center;
+}
+
+.commentText {
+  border: 1px solid black;
+}

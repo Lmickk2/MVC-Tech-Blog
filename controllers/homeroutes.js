@@ -1,44 +1,64 @@
 const router = require('express').Router();
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
-  try {
-    const PostData = await Post.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
-    });
+router.get('/', (req, res) => {
+  Post.findAll({
+          attributes: [
+              'id',
+              'name',
+              'description',
+          ],
+          include: [{
+                  model: Comment,
+                  attributes: ['id', 'content', 'post_id', 'user_id'],
+                  include: {
+                      model: User,
+                      attributes: ['name']
+                  }
+              },
+              {
+                  model: User,
+                  attributes: ['name']
+              }
+          ]
+      })
+      .then(postData => {
+        const posts = postData.map(post => post.get({
+            plain: true
+        }));
 
-    const Posts = PostData.map((Post) => Post.get({ plain: true }));
-
-    res.render('homepage', { 
-      Posts, 
-      logged_in: req.session.logged_in 
+        res.render('homepage', {
+            posts,
+            loggedIn: req.session.loggedIn
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
     });
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
 
-router.get('/Post/:id', async (req, res) => {
+router.get('/posts/:id', async (req, res) => {
   try {
-    const PostData = await Post.findByPk(req.params.id, {
+    const postData = await Post.findByPk(req.params.id, {
       include: [
         {
           model: User,
           attributes: ['name'],
         },
+
+        {
+					model: Comment,
+					attributes: ['content', 'user_id', 'post_id'],
+				},
       ],
     });
 
-    const Post = PostData.get({ plain: true });
+    const post = postData.get({ plain: true });
 
-    res.render('Post', {
-      ...Post,
+    res.render('post', {
+      ...post,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -66,7 +86,7 @@ router.get('/profile', withAuth, async (req, res) => {
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/homepage');
     return;
   }
 

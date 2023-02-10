@@ -9,16 +9,19 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
+
 <body>
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
-      <h1>Tech Blog</h1>
+      <h1>
+        <a href="/" class="techBlog">Tech-Bloggr</a>
+      </h1>
       <nav>
         {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="no-button" id="logout">logout</button>
+        <a href="/profile" class="navClass">Dashboard</a> 
+        <button class="no-button" id="logout">Logout</button>
         {{else}}
-        <a href="/login">login</a>
+        <a href="/login" class="navClass">Login</a>
         {{/if}}
       </nav>
     </header>
@@ -30,6 +33,7 @@
     </footer>
   </div>
 
+  <!-- Render script for logged in users only -->
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
