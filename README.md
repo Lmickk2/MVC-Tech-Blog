@@ -1,5 +1,7 @@
 # MVC: Tech Blog
 
+<img src="./demo.png">
+
 ## Description
 
 - Using Handlebars, SQL, and other backend technologies, we are able to pull user info, as well as post info, and display it on the front end.
