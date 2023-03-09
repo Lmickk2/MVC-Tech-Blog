@@ -10,7 +10,7 @@
 - Run node seed.js to seed data
 - Run node server.js to start up the server.
 - Navigate to localhost:3001 to view.
-- View and add posts and comments throughout the site!
+- View and add posts and comments throughout the site.
 
 ## Authors 
 
